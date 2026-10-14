@@ -1,3 +1,6 @@
+import { error } from "console";
+import { llm, model } from "../../../lib/llm"
+
 export async function POST(request: Request) {
   let body: unknown;
   try {
@@ -19,7 +22,24 @@ export async function POST(request: Request) {
     );
   }
 
-  return Response.json({
-    answer: `Hello, you just said: ${body.message}`,
-  });
+  try {
+    const response = await llm.models.generateContent({
+      model,
+      contents: body.message,
+    });
+
+    return Response.json({
+      answer: response.text ?? "",
+    });
+  } catch (error) {
+    console.error(
+      "Gemini API request failed:",
+      error instanceof Error ? error.message : String(error),
+    );
+
+    return Response.json(
+      { error: "Failed to generate a response." },
+      { status: 500 },
+    );
+  }
 }
