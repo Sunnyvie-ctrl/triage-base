@@ -1,117 +1,73 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 
-type Message = {
-  role: "user" | "assistant";
-  content: string;
-};
+export default function TriagePage() {
+  const [subject, setSubject] = useState("");
+  const [body, setBody] = useState("");
+  const [reply, setReply] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-export default function ChatPage() {
-  const [text, setText] = useState("");
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [isSending, setIsSending] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  async function submitTicket(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    setReply(null);
 
-  async function sendMessage(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (isSending || !text.trim()) return;
-
-    setIsSending(true);
-    setError(null);
-
-    // Add the new user message to the history
-    const newMessages = [
-      ...messages,
-      { role: "user", content: text }
-    ];
+    const ticket = `${subject}\n\n${body}`;
 
     try {
-      const response = await fetch("/api/chat", {
+      const res = await fetch("/api/triage", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: newMessages }),
+        body: JSON.stringify({ ticket }),
       });
 
-      const data: unknown = await response.json();
-
-      if (!response.ok) {
-        const detail =
-          typeof data === "object" &&
-          data !== null &&
-          "error" in data &&
-          typeof (data as any).error === "string"
-            ? (data as any).error
-            : "Unable to send your message. Please try again.";
-        throw new Error(detail);
+      const text = await res.text();
+      if (!res.ok) {
+        setReply(`Error: ${text}`);
+      } else {
+        setReply(text);
       }
-
-      if (
-        typeof data !== "object" ||
-        data === null ||
-        !("assistantMessage" in data) ||
-        typeof (data as any).assistantMessage !== "object" ||
-        typeof (data as any).assistantMessage.content !== "string"
-      ) {
-        throw new Error("The server returned an invalid reply. Please try again.");
-      }
-
-      const assistantMessage = (data as any).assistantMessage;
-
-      // Update history with assistant reply
-      setMessages([
-        ...newMessages,
-        { role: "assistant", content: assistantMessage.content }
-      ]);
-
-      setText("");
-    } catch (error) {
-      setError(
-        error instanceof Error
-          ? error.message
-          : "Unable to send your message. Please try again."
-      );
+    } catch {
+      setReply("Network error");
     } finally {
-      setIsSending(false);
+      setLoading(false);
     }
   }
 
   return (
-    <main className="chat">
-      <h1>Support chat</h1>
-      <p>Send a message and get a real LLM reply.</p>
+    <main style={{ padding: 20 }}>
+      <h1>Triage V1</h1>
 
-      <section
-        className="messages"
-        role="log"
-        aria-label="Chat messages"
-        aria-live="polite"
-      >
-        {messages.length === 0 && <p>No messages yet.</p>}
-        {messages.map((message, index) => (
-          <div className={`message ${message.role}`} key={index}>
-            <strong>{message.role === "user" ? "You" : "Assistant"}</strong>
-            <p>{message.content}</p>
-          </div>
-        ))}
-      </section>
+      <form onSubmit={submitTicket}>
+        <label style={{ display: "block", marginBottom: 8 }}>
+          Subject
+          <input
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
+            style={{ display: "block", width: "100%", marginTop: 4 }}
+          />
+        </label>
 
-      <form onSubmit={sendMessage} aria-busy={isSending}>
-        <label htmlFor="message">Your message</label>
-        <textarea
-          id="message"
-          value={text}
-          onChange={(event) => setText(event.target.value)}
-          placeholder="Describe what you need help with..."
-          rows={3}
-          required
-          disabled={isSending}
-        />
-        <button type="submit" disabled={isSending || !text.trim()}>
-          {isSending ? "Sending..." : "Send"}
+        <label style={{ display: "block", marginBottom: 8 }}>
+          Body
+          <textarea
+            value={body}
+            onChange={(e) => setBody(e.target.value)}
+            rows={6}
+            style={{ display: "block", width: "100%", marginTop: 4 }}
+          />
+        </label>
+
+        <button type="submit" disabled={loading}>
+          {loading ? "Sending..." : "Send Ticket"}
         </button>
-        {error && <p role="alert">{error}</p>}
       </form>
+
+      <section style={{ marginTop: 20 }}>
+        <h2>LLM Reply (plain text)</h2>
+        <pre style={{ whiteSpace: "pre-wrap" }}>{reply ?? "No reply yet."}</pre>
+      </section>
     </main>
   );
 }
