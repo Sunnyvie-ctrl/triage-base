@@ -1,0 +1,2 @@
+{"ts":"2026-10-19T16:10:59.813Z","route":"triage","api":"google_genai_generate_content","prompt_version":"triage-v2","model":"gemini-2.5-flash","status":200,"input_tokens":380,"output_tokens":70,"total_tokens":1353,"usage_available":true,"estimated_cost_usd":0.000289}
+{"ts":"2026-10-19T17:05:39.085Z","route":"triage","api":"google_genai_generate_content","prompt_version":"triage-v2","model":"gemini-2.5-flash","status":200,"input_tokens":379,"output_tokens":53,"thoughts_tokens":446,"total_tokens":878,"usage_available":true,"estimated_cost_usd":0.0013612000000000001}

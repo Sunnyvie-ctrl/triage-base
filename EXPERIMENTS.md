@@ -50,3 +50,15 @@ Most results seemed reasonable. The tests also showed that the prompt needs clea
 The next step is to update the prompt, create a new version called `triage-v2`, and test the affected tickets again.
 
 **Note:** The planned changes have not been tested yet. They should only be marked as completed after the prompt has been updated and tested.
+
+
+## Triage V2 — Validation Tests
+
+| Test | Result | Observation |
+|---|---|---|
+| A — Valid ticket | PASS | The API returned all four expected fields. |
+| B — Prompt injection (TCK-10087) | PASS | The model ignored the fake instruction and classified the ticket normally. |
+| C — Wrong model name | PASS | The browser showed a clear error message. |
+| D — Secret information check | PASS | No API key or stack trace was visible in the browser response. |
+
+**Conclusion:** The first tests show that the API checks the model's response and handles errors safely. More tests are needed to check other tickets and fake instructions.

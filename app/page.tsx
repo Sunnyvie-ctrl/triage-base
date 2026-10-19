@@ -1,17 +1,20 @@
 "use client";
 
 import { useState } from "react";
+import type { TriageResult } from "../lib/schema";
 
 export default function TriagePage() {
   const [subject, setSubject] = useState("");
   const [body, setBody] = useState("");
-  const [reply, setReply] = useState<string | null>(null);
+  const [reply, setReply] = useState<TriageResult | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   async function submitTicket(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
     setReply(null);
+    setError(null);
 
     const ticket = `${subject}\n\n${body}`;
 
@@ -22,25 +25,31 @@ export default function TriagePage() {
         body: JSON.stringify({ ticket }),
       });
 
-      const text = await res.text();
+      const data = await res.json();
+
       if (!res.ok) {
-        setReply(`Error: ${text}`);
-      } else {
-        setReply(text);
+        setError(
+          typeof data.error === "string"
+            ? data.error
+            : "Triage failed. Please try again.",
+        );
+        return;
       }
+
+      setReply(data as TriageResult);
     } catch {
-      setReply("Network error");
+      setError("Network error. Please check your connection and try again.");
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <main style={{ padding: 20 }}>
-      <h1>Triage V1</h1>
+    <main style={{ padding: 20, maxWidth: 800, margin: "0 auto" }}>
+      <h1>Triage V2</h1>
 
       <form onSubmit={submitTicket}>
-        <label style={{ display: "block", marginBottom: 8 }}>
+        <label style={{ display: "block", marginBottom: 12 }}>
           Subject
           <input
             value={subject}
@@ -49,7 +58,7 @@ export default function TriagePage() {
           />
         </label>
 
-        <label style={{ display: "block", marginBottom: 8 }}>
+        <label style={{ display: "block", marginBottom: 12 }}>
           Body
           <textarea
             value={body}
@@ -60,14 +69,25 @@ export default function TriagePage() {
         </label>
 
         <button type="submit" disabled={loading}>
-          {loading ? "Sending..." : "Send Ticket"}
+          {loading ? "Analyzing..." : "Send Ticket"}
         </button>
       </form>
 
-      <section style={{ marginTop: 20 }}>
-        <h2>LLM Reply (plain text)</h2>
-        <pre style={{ whiteSpace: "pre-wrap" }}>{reply ?? "No reply yet."}</pre>
-      </section>
+      {error && (
+        <p role="alert" style={{ color: "crimson", marginTop: 20 }}>
+          {error}
+        </p>
+      )}
+
+      {reply && (
+        <section aria-live="polite" style={{ marginTop: 24 }}>
+          <h2>Validated Triage Result</h2>
+          <p><strong>Category:</strong> {reply.category}</p>
+          <p><strong>Priority:</strong> {reply.priority}</p>
+          <p><strong>Summary:</strong> {reply.summary}</p>
+          <p><strong>Suggested action:</strong> {reply.suggested_action}</p>
+        </section>
+      )}
     </main>
   );
 }

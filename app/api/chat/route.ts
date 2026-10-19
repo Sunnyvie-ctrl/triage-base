@@ -1,14 +1,26 @@
-
 import { NextResponse } from "next/server";
 import { generatePlainText } from "../../../lib/llm";
 
 export async function POST(request: Request) {
   try {
-    const { message } = await request.json();
+    const body: unknown = await request.json();
+
+    if (
+      typeof body !== "object" ||
+      body === null ||
+      !("message" in body) ||
+      typeof body.message !== "string" ||
+      !body.message.trim()
+    ) {
+      return NextResponse.json(
+        { error: "Please provide a non-empty message." },
+        { status: 400 },
+      );
+    }
 
     const reply = await generatePlainText(
       "You are a helpful assistant. Answer the user's message clearly and concisely.",
-      message,
+      body.message,
     );
 
     return new Response(reply, {
