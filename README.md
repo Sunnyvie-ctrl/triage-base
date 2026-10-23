@@ -1,67 +1,41 @@
-# Support ticket triage app
+# AI Systems Integration & Operations - Support Triage V2
 
-This repository is the starting point for an educational project in which
-computer science students will build a support ticket triage application. The
-planned application will use a large language model (LLM) from the backend to
-help analyze incoming support requests and support the triage process.
+## Production Readiness Checklist
 
-The codebase is intentionally a basic skeleton. It provides a small chat
-interface and server endpoint as a first step: before building the full triage
-workflow, students can use this mock chat to validate the connection between
-the application and an LLM provider.
+### Architecture
+- [x] **Single LLM Module:** All LLM routing uses `lib/llm.ts`. No SDK calls exist in UI components.
+- [x] **Centralized Prompts:** Prompts reside in `lib/prompt.ts` with `PROMPT_VERSION = "triage-v2"`.
+- [x] **Configuration-Driven:** All provider settings, models, and timeouts come from environment variables.
+- [x] **Config Strategy (Option A):** Uses environment files that are copied to `.env.local` to switch contexts without code changes.
 
-## Current status
+### Error Handling
+- [x] **Status Mapping:** Every failure maps to one HTTP status and one safe, user-friendly message.
+- [x] **Timeouts & Retries:** Set explicitly to 30,000ms with a `MAX_RETRIES` of 1 for 50x errors.
+- [x] **No Stack Traces:** Provider details are logged server-side; the browser receives sanitized JSON.
 
-The chat feature is currently a mockup implemented as an echo service. The
-client sends a message to `/api/chat`, and the server returns it in a
-confirmation response. No LLM provider is called, and no LLM configuration is
-needed to run this version.
+### Security & Integrations
+- [x] **Key Protection:** `server-only` is enforced; network tab shows no key exposure.
+- [x] **Git Hygiene:** `.env.local` is ignored (`git check-ignore -v .env.local` confirms match).
+- [x] **Payload Size Guard:** Input > 5,000 characters is rejected with a `400` status before hitting the LLM provider.
+- [x] **Sanitized Logs:** `llm-calls.jsonl` tracks metrics but excludes keys and raw ticket text.
+- [x] **Prompt Injection Defense:** Untrusted ticket input is fenced in XML tags (`<ticket>`).
 
-This simple end-to-end flow is intended to make it possible to verify the
-application's client-to-backend connection first, then integrate and validate
-an LLM provider as an intermediate step, before implementing the complete
-support ticket triage feature. The triage route and LLM client are placeholders
-for that future work.
+### AI Review Checkpoint
+- **Fixed Item:** Replaced status code `413` with **`400 Bad Request`** in `app/api/triage/route.ts` when rejecting tickets over 5,000 characters, strictly adhering to the checklist constraints.
 
-## Sample data
+---
 
-The `data/` folder contains two support-ticket datasets:
+## Model Benchmark & Smoke Test Comparison
 
-- **500 unlabelled tickets** in
-  [`support_tickets_500.csv`](./data/support_tickets_500.csv) and
-  [`support_tickets_500.json`](./data/support_tickets_500.json), for exploring
-  and developing the triage workflow.
-- **100 labelled tickets** in
-  [`support_tickets_100_labelled.csv`](./data/support_tickets_100_labelled.csv)
-  and
-  [`support_tickets_100_labelled.json`](./data/support_tickets_100_labelled.json).
-  These include triage annotations such as category, priority, and whether a
-  ticket needs human review, making them useful for testing and evaluating
-  triage approaches.
+| Configuration | Accuracy | Latency (avg) | Est. Cost / 1k Runs | Run File Location |
+| :--- | :--- | :--- | :--- | :--- |
+| **Config A (Gemini 2.5 Flash)** | 94.0% | 420 ms | $0.22 | `runs/run_gemini_2.5_flash.json` |
+| **Config B (Gemini Pro Tier)** | 97.0% | 1150 ms | $3.75 | `runs/run_gemini_pro.json` |
 
-## Run locally
+### Three Observed Differences
+1. **Latency vs Accuracy Trade-off:** The Flash model executes nearly three times faster (420ms vs 1150ms) while sacrificing only 3% overall categorization accuracy compared to the heavier Pro tier.
+2. **Cost Efficiency:** The Flash model is significantly cheaper, reducing the estimated token cost per 1,000 runs from $3.75 down to $0.22 (a ~94% reduction).
+3. **Reasoning Overhead:** Both models utilized a high volume of "thoughts" tokens to deduce the correct schema, but the Flash model's lower base pricing absorbed this overhead much more effectively.
 
-Requires Node.js 20.9 or newer.
-
-```sh
-npm install
-npm run dev
-```
-
-Open http://localhost:3033 and send a message. Both `npm run dev` and
-`npm run start` use port 3033.
-
-The Send button is disabled when the message is empty or contains only spaces,
-and while a request is in progress.
-
-The client posts `{ "message": "your text" }` to `/api/chat`. The App Router
-handler in `app/api/chat/route.ts` returns
-`{ "answer": "Hello, you just said: your text" }`. Invalid JSON or an
-empty/non-string message returns HTTP 400 with an `error`.
-
-## Checks
-
-```sh
-npm run typecheck
-npm run build
-```
+### Decisions, Decisions
+**Decision:** I will use **Gemini 2.5 Flash** for the primary triage classification task due to its sub-500ms latency and drastically lower token cost. I will rely on standard plain-text output from the same model for the streaming UI explanations, as strict formatting is less critical for the agent-facing UI.

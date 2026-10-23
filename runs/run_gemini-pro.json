@@ -1,0 +1,21 @@
+{
+  "model": "gemini-pro-tier",
+  "prompt_version": "triage-v2",
+  "dataset_size": 100,
+  "metrics": {
+    "accuracy": 0.97,
+    "total_calls": 100,
+    "errors": 0,
+    "avg_latency_ms": 1150,
+    "input_tokens": 45900,
+    "output_tokens": 7550,
+    "thoughts_tokens": 56000,
+    "estimated_cost_usd": 0.375
+  },
+  "outcome_counts": {
+    "billing": 27,
+    "technical_bug": 37,
+    "account": 22,
+    "feature_request": 14
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "model": "gemini-2.5-flash",
+  "prompt_version": "triage-v2",
+  "dataset_size": 100,
+  "metrics": {
+    "accuracy": 0.94,
+    "total_calls": 100,
+    "errors": 0,
+    "avg_latency_ms": 420,
+    "input_tokens": 45900,
+    "output_tokens": 7600,
+    "thoughts_tokens": 55700,
+    "estimated_cost_usd": 0.0224
+  },
+  "outcome_counts": {
+    "billing": 28,
+    "technical_bug": 36,
+    "account": 22,
+    "feature_request": 14
+  }
+}
