@@ -1,0 +1,118 @@
+{
+  "created_at": "2026-10-19T18:30:35.636Z",
+  "endpoint": "http://localhost:3033/api/triage",
+  "model": null,
+  "prompt_version": null,
+  "total_tickets": 100,
+  "processed_tickets": 1,
+  "remaining_tickets": 99,
+  "run_complete": false,
+  "stopped_reason": "http_429",
+  "outcome_counts": {
+    "429": 1
+  },
+  "metrics": {
+    "category_accuracy": null,
+    "category_correct": 0,
+    "category_evaluated": 0,
+    "priority_accuracy": null,
+    "priority_correct": 0,
+    "priority_evaluated": 0,
+    "mean_latency_ms": 410,
+    "total_latency_ms": 410,
+    "estimated_cost_usd": null,
+    "known_cost_calls": 0,
+    "token_totals": {
+      "input_tokens": null,
+      "output_tokens": null,
+      "thoughts_tokens": null,
+      "calls_with_input_usage": 0,
+      "calls_with_output_usage": 0,
+      "calls_with_thoughts_usage": 0
+    }
+  },
+  "category_confusion_matrix": {
+    "billing": {
+      "billing": 0,
+      "technical_bug": 0,
+      "account": 0,
+      "feature_request": 0
+    },
+    "technical_bug": {
+      "billing": 0,
+      "technical_bug": 0,
+      "account": 0,
+      "feature_request": 0
+    },
+    "account": {
+      "billing": 0,
+      "technical_bug": 0,
+      "account": 0,
+      "feature_request": 0
+    },
+    "feature_request": {
+      "billing": 0,
+      "technical_bug": 0,
+      "account": 0,
+      "feature_request": 0
+    }
+  },
+  "priority_confusion_matrix": {
+    "low": {
+      "low": 0,
+      "medium": 0,
+      "high": 0
+    },
+    "medium": {
+      "low": 0,
+      "medium": 0,
+      "high": 0
+    },
+    "high": {
+      "low": 0,
+      "medium": 0,
+      "high": 0
+    }
+  },
+  "tag_slices": {
+    "has_pii": {
+      "tickets": 1,
+      "outcome_counts": {
+        "429": 1
+      },
+      "category_accuracy": null,
+      "category_correct": 0,
+      "category_evaluated": 0,
+      "priority_accuracy": null,
+      "priority_correct": 0,
+      "priority_evaluated": 0,
+      "mean_latency_ms": 410,
+      "estimated_cost_usd": null,
+      "known_cost_calls": 0
+    }
+  },
+  "results": [
+    {
+      "ticket_id": "TCK-10001",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "429",
+      "status": 429,
+      "latency_ms": 410,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "estimated_cost_usd": null,
+      "tags": [
+        "has_pii"
+      ],
+      "error": "The AI service quota or rate limit has been reached. Please try again later."
+    }
+  ]
+}

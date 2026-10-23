@@ -1,44 +1,42 @@
-import { error } from "console";
-import { llm, model } from "../../../lib/llm"
+import { NextResponse } from "next/server";
+import { generatePlainText } from "../../../lib/llm";
 
 export async function POST(request: Request) {
-  let body: unknown;
   try {
-    body = await request.json();
-  } catch {
-    return Response.json({ error: "Invalid JSON body." }, { status: 400 });
-  }
+    const body: unknown = await request.json();
 
-  if (
-    typeof body !== "object" ||
-    body === null ||
-    !("message" in body) ||
-    typeof body.message !== "string" ||
-    !body.message.trim()
-  ) {
-    return Response.json(
-      { error: "Please provide a non-empty message string." },
-      { status: 400 },
+    if (
+      typeof body !== "object" ||
+      body === null ||
+      !("message" in body) ||
+      typeof body.message !== "string" ||
+      !body.message.trim()
+    ) {
+      return NextResponse.json(
+        { error: "Please provide a non-empty message." },
+        { status: 400 },
+      );
+    }
+
+    const reply = await generatePlainText(
+      "You are a helpful assistant. Answer the user's message clearly and concisely.",
+      body.message,
     );
-  }
 
-  try {
-    const response = await llm.models.generateContent({
-      model,
-      contents: body.message,
-    });
-
-    return Response.json({
-      answer: response.text ?? "",
+    return new Response(reply, {
+      status: 200,
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+      },
     });
   } catch (error) {
     console.error(
-      "Gemini API request failed:",
+      "Chat failed:",
       error instanceof Error ? error.message : String(error),
     );
 
-    return Response.json(
-      { error: "Failed to generate a response." },
+    return NextResponse.json(
+      { error: "Failed to process the chat message." },
       { status: 500 },
     );
   }

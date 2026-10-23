@@ -1,0 +1,1879 @@
+{
+  "created_at": "2026-10-19T17:46:04.697Z",
+  "endpoint": "http://localhost:3033/api/triage",
+  "model": "gemini-2.5-flash",
+  "prompt_version": "triage-v2",
+  "total_tickets": 100,
+  "outcome_counts": {
+    "200": 1,
+    "502": 99
+  },
+  "metrics": {
+    "category_accuracy": 1,
+    "category_correct": 1,
+    "category_evaluated": 1,
+    "priority_accuracy": 1,
+    "priority_correct": 1,
+    "priority_evaluated": 1,
+    "mean_latency_ms": 230.6,
+    "total_latency_ms": 23061,
+    "token_totals": {
+      "input_tokens": null,
+      "output_tokens": null,
+      "thoughts_tokens": null,
+      "calls_with_input_usage": 1,
+      "calls_with_output_usage": 1,
+      "calls_with_thoughts_usage": 1
+    }
+  },
+  "category_confusion_matrix": {
+    "billing": {
+      "billing": 0,
+      "technical_bug": 0,
+      "account": 0,
+      "feature_request": 0
+    },
+    "technical_bug": {
+      "billing": 0,
+      "technical_bug": 1,
+      "account": 0,
+      "feature_request": 0
+    },
+    "account": {
+      "billing": 0,
+      "technical_bug": 0,
+      "account": 0,
+      "feature_request": 0
+    },
+    "feature_request": {
+      "billing": 0,
+      "technical_bug": 0,
+      "account": 0,
+      "feature_request": 0
+    }
+  },
+  "priority_confusion_matrix": {
+    "low": {
+      "low": 1,
+      "medium": 0,
+      "high": 0
+    },
+    "medium": {
+      "low": 0,
+      "medium": 0,
+      "high": 0
+    },
+    "high": {
+      "low": 0,
+      "medium": 0,
+      "high": 0
+    }
+  },
+  "results": [
+    {
+      "ticket_id": "TCK-10001",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "low"
+      },
+      "prediction": {
+        "category": "technical_bug",
+        "priority": "low",
+        "summary": "Sort arrow in table headers is not visible on hover, only after clicking, despite the sorting functionality working correctly.",
+        "suggested_action": "Investigate the reported UI behavior to confirm if the sort arrow visibility on hover is indeed missing and not functioning as intended, and then escalate to the engineering team for a fix."
+      },
+      "outcome": "200",
+      "status": 200,
+      "latency_ms": 1798,
+      "tokens": {
+        "input_tokens": 467,
+        "output_tokens": 93,
+        "thoughts_tokens": 150,
+        "total_tokens": 710
+      },
+      "error": null
+    },
+    {
+      "ticket_id": "TCK-10014",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 186,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10017",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 255,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10019",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 240,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10023",
+      "expected": {
+        "category": "feature_request",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 243,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10024",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 211,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10033",
+      "expected": {
+        "category": "feature_request",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 262,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10034",
+      "expected": {
+        "category": "feature_request",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 240,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10035",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 228,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10038",
+      "expected": {
+        "category": "account",
+        "priority": "high"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 205,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10040",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "high"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 239,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10049",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 167,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10051",
+      "expected": {
+        "category": "account",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 263,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10056",
+      "expected": {
+        "category": "account",
+        "priority": "high"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 204,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10058",
+      "expected": {
+        "category": "billing",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 341,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10066",
+      "expected": {
+        "category": "feature_request",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 232,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10096",
+      "expected": {
+        "category": "account",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 233,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10097",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "high"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 234,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10099",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 212,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10102",
+      "expected": {
+        "category": "billing",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 229,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10104",
+      "expected": {
+        "category": "feature_request",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 192,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10106",
+      "expected": {
+        "category": "feature_request",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 165,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10109",
+      "expected": {
+        "category": "feature_request",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 238,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10117",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "high"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 240,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10125",
+      "expected": {
+        "category": "feature_request",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 388,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10127",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 255,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10131",
+      "expected": {
+        "category": "account",
+        "priority": "high"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 249,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10140",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 165,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10142",
+      "expected": {
+        "category": "billing",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 193,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10148",
+      "expected": {
+        "category": "feature_request",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 200,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10150",
+      "expected": {
+        "category": "account",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 167,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10155",
+      "expected": {
+        "category": "billing",
+        "priority": "high"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 198,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10157",
+      "expected": {
+        "category": "billing",
+        "priority": "high"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 224,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10162",
+      "expected": {
+        "category": "account",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 183,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10168",
+      "expected": {
+        "category": "billing",
+        "priority": "high"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 179,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10171",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 203,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10172",
+      "expected": {
+        "category": "billing",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 183,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10178",
+      "expected": {
+        "category": "account",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 188,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10188",
+      "expected": {
+        "category": "account",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 181,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10194",
+      "expected": {
+        "category": "billing",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 180,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10196",
+      "expected": {
+        "category": "feature_request",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 187,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10200",
+      "expected": {
+        "category": "billing",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 175,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10210",
+      "expected": {
+        "category": "billing",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 171,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10219",
+      "expected": {
+        "category": "billing",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 184,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10222",
+      "expected": {
+        "category": "feature_request",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 178,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10229",
+      "expected": {
+        "category": "feature_request",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 215,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10234",
+      "expected": {
+        "category": "account",
+        "priority": "high"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 171,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10250",
+      "expected": {
+        "category": "feature_request",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 225,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10254",
+      "expected": {
+        "category": "account",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 255,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10256",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "high"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 214,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10260",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "high"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 208,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10267",
+      "expected": {
+        "category": "account",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 193,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10272",
+      "expected": {
+        "category": "billing",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 186,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10274",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 221,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10276",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "high"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 203,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10286",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 189,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10303",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 244,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10308",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "high"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 177,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10310",
+      "expected": {
+        "category": "feature_request",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 213,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10312",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "high"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 168,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10317",
+      "expected": {
+        "category": "account",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 187,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10321",
+      "expected": {
+        "category": "billing",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 196,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10329",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 234,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10333",
+      "expected": {
+        "category": "feature_request",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 229,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10337",
+      "expected": {
+        "category": "billing",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 180,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10339",
+      "expected": {
+        "category": "account",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 213,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10340",
+      "expected": {
+        "category": "billing",
+        "priority": "high"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 188,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10348",
+      "expected": {
+        "category": "account",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 175,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10354",
+      "expected": {
+        "category": "billing",
+        "priority": "high"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 209,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10357",
+      "expected": {
+        "category": "account",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 178,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10360",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 189,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10365",
+      "expected": {
+        "category": "billing",
+        "priority": "high"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 244,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10369",
+      "expected": {
+        "category": "billing",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 171,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10376",
+      "expected": {
+        "category": "feature_request",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 255,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10384",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "high"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 158,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10385",
+      "expected": {
+        "category": "account",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 210,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10387",
+      "expected": {
+        "category": "feature_request",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 262,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10396",
+      "expected": {
+        "category": "account",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 297,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10400",
+      "expected": {
+        "category": "account",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 301,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10402",
+      "expected": {
+        "category": "billing",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 320,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10403",
+      "expected": {
+        "category": "account",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 294,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10404",
+      "expected": {
+        "category": "feature_request",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 298,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10410",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 314,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10414",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 220,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10420",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 232,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10421",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "high"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 212,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10431",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "high"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 216,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10434",
+      "expected": {
+        "category": "account",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 229,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10442",
+      "expected": {
+        "category": "account",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 184,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10445",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 166,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10448",
+      "expected": {
+        "category": "billing",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 162,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10450",
+      "expected": {
+        "category": "billing",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 183,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10459",
+      "expected": {
+        "category": "feature_request",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 181,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10460",
+      "expected": {
+        "category": "billing",
+        "priority": "low"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 252,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10470",
+      "expected": {
+        "category": "billing",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 184,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10473",
+      "expected": {
+        "category": "billing",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 178,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10476",
+      "expected": {
+        "category": "technical_bug",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 214,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10482",
+      "expected": {
+        "category": "feature_request",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 166,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10490",
+      "expected": {
+        "category": "account",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 232,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    },
+    {
+      "ticket_id": "TCK-10491",
+      "expected": {
+        "category": "feature_request",
+        "priority": "medium"
+      },
+      "prediction": null,
+      "outcome": "502",
+      "status": 502,
+      "latency_ms": 178,
+      "tokens": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "thoughts_tokens": null,
+        "total_tokens": null
+      },
+      "error": "Triage is temporarily unavailable. Please try again later."
+    }
+  ]
+}

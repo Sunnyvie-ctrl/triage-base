@@ -1,106 +1,187 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
+import type { TriageResult } from "../lib/schema";
 
-type Message = {
-  role: "user" | "assistant";
-  text: string;
-};
-
-export default function ChatPage() {
-  const [text, setText] = useState("");
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [isSending, setIsSending] = useState(false);
+export default function TriagePage() {
+  const [subject, setSubject] = useState("");
+  const [body, setBody] = useState("");
+  const [reply, setReply] = useState<TriageResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [submittedTicket, setSubmittedTicket] = useState("");
+  const [explanation, setExplanation] = useState("");
+  const [explaining, setExplaining] = useState(false);
+  const [explanationError, setExplanationError] = useState("");
 
-  async function sendMessage(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (isSending || !text.trim()) return;
+  const [tokens, setTokens] = useState<{ input: string; output: string; total: string } | null>(null);
 
-    const message = text;
-    setIsSending(true);
+  async function submitTicket(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    setReply(null);
     setError(null);
+    setTokens(null); 
+
+    const ticket = `${subject}\n\n${body}`;
 
     try {
-      const response = await fetch("/api/chat", {
+      const res = await fetch("/api/triage", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message }),
+        body: JSON.stringify({ ticket }),
       });
-      const data: unknown = await response.json();
 
-      if (!response.ok) {
-        const detail =
-          typeof data === "object" &&
-          data !== null &&
-          "error" in data &&
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(
           typeof data.error === "string"
             ? data.error
-            : "Unable to send your message. Please try again.";
-        throw new Error(detail);
+            : "Triage failed. Please try again.",
+        );
+        return;
       }
 
-      if (
-        typeof data !== "object" ||
-        data === null ||
-        !("answer" in data) ||
-        typeof data.answer !== "string"
-      ) {
-        throw new Error("The server returned an invalid reply. Please try again.");
+      setReply(data as TriageResult);
+      setSubmittedTicket(ticket);
+      setExplanation("");
+      setExplanationError("");
+
+      setTokens({
+        input: res.headers.get("x-llm-input-tokens") || "0",
+        output: res.headers.get("x-llm-output-tokens") || "0",
+        total: res.headers.get("x-llm-total-tokens") || "0",
+      });
+
+    } catch {
+      setError("Network error. Please check your connection and try again.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function explainResult() {
+    if (!reply || !submittedTicket || explaining) return;
+
+    setExplaining(true);
+    setExplanation("");
+    setExplanationError("");
+
+    try {
+      const response = await fetch("/api/triage/explain", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ticket: submittedTicket,
+          triage: reply,
+        }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => null);
+        throw new Error(
+          typeof data?.error === "string"
+            ? data.error
+            : "Could not generate an explanation.",
+        );
       }
 
-      const answer = data.answer;
-      setMessages((previous) => [
-        ...previous,
-        { role: "user", text: message },
-        { role: "assistant", text: answer },
-      ]);
-      setText("");
+      if (!response.body) {
+        throw new Error("Streaming is not supported by this response.");
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        setExplanation((previous) => previous + decoder.decode(value, { stream: true }));
+      }
+
+      const remaining = decoder.decode();
+      if (remaining) {
+        setExplanation((previous) => previous + remaining);
+      }
     } catch (error) {
-      setError(
-        error instanceof Error
-          ? error.message
-          : "Unable to send your message. Please try again.",
+      setExplanationError(
+        error instanceof Error ? error.message : "Could not generate an explanation.",
       );
     } finally {
-      setIsSending(false);
+      setExplaining(false);
     }
   }
 
   return (
-    <main className="chat">
-      <h1>Support chat</h1>
-      <p>Send a message and get an echo reply.</p>
-      <section
-        className="messages"
-        role="log"
-        aria-label="Chat messages"
-        aria-live="polite"
-      >
-        {messages.length === 0 && <p>No messages yet.</p>}
-        {messages.map((message, index) => (
-          <div className={`message ${message.role}`} key={index}>
-            <strong>{message.role === "user" ? "You" : "Assistant"}</strong>
-            <p>{message.text}</p>
-          </div>
-        ))}
-      </section>
-      <form onSubmit={sendMessage} aria-busy={isSending}>
-        <label htmlFor="message">Your message</label>
-        <textarea
-          id="message"
-          value={text}
-          onChange={(event) => setText(event.target.value)}
-          placeholder="Describe what you need help with..."
-          rows={3}
-          required
-          disabled={isSending}
-        />
-        <button type="submit" disabled={isSending || !text.trim()}>
-          {isSending ? "Sending..." : "Send"}
+    <main style={{ padding: 20, maxWidth: 800, margin: "0 auto" }}>
+      <h1>Triage V2</h1>
+
+      <form onSubmit={submitTicket}>
+        <label style={{ display: "block", marginBottom: 12 }}>
+          Subject
+          <input
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
+            style={{ display: "block", width: "100%", marginTop: 4 }}
+          />
+        </label>
+
+        <label style={{ display: "block", marginBottom: 12 }}>
+          Body
+          <textarea
+            value={body}
+            onChange={(e) => setBody(e.target.value)}
+            rows={6}
+            style={{ display: "block", width: "100%", marginTop: 4 }}
+          />
+        </label>
+
+        <button type="submit" disabled={loading}>
+          {loading ? "Analyzing..." : "Send Ticket"}
         </button>
-        {error && <p role="alert">{error}</p>}
       </form>
+
+      {error && (
+        <p role="alert" style={{ color: "crimson", marginTop: 20 }}>
+          {error}
+        </p>
+      )}
+
+      {reply && (
+        <section aria-live="polite" style={{ marginTop: 24 }}>
+          <h2>Validated Triage Result</h2>
+          <p><strong>Category:</strong> {reply.category}</p>
+          <p><strong>Priority:</strong> {reply.priority}</p>
+          <p><strong>Summary:</strong> {reply.summary}</p>
+          <p><strong>Suggested action:</strong> {reply.suggested_action}</p>
+          
+          {tokens && (
+            <div style={{ marginTop: 12, padding: "8px 12px", backgroundColor: "#f1f5f9", borderRadius: 6, fontSize: "0.9rem" }}>
+              <strong>Token Usage:</strong> {tokens.input} input + {tokens.output} output = <strong>{tokens.total} total</strong>
+            </div>
+          )}
+
+          <div style={{ marginTop: 16 }}>
+            <button type="button" onClick={explainResult} disabled={explaining}>
+              {explaining ? "Generating explanation..." : "Explain this result"}
+            </button>
+
+            {explanationError && (
+              <p role="alert" style={{ color: "crimson" }}>
+                {explanationError}
+              </p>
+            )}
+
+            {explanation && (
+              <section aria-live="polite" style={{ marginTop: 12 }}>
+                <h3>Why this result?</h3>
+                <p style={{ whiteSpace: "pre-wrap" }}>{explanation}</p>
+              </section>
+            )}
+          </div>
+        </section>
+      )}
     </main>
   );
 }
