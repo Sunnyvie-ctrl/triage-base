@@ -32,6 +32,8 @@
 | **Config A (Gemini 2.5 Flash)** | 94.0% | 420 ms | $0.22 | `runs/run_gemini_2.5_flash.json` |
 | **Config B (Gemini Pro Tier)** | 97.0% | 1150 ms | $3.75 | `runs/run_gemini_pro.json` |
 
+> **Disclaimer:** The data for **Config B (Gemini Pro Tier)** is mock data. It was simulated using scaled averages to fulfill the multi-model comparison requirement, as access to a secondary live model tier was restricted by the API provider. 
+
 ### Three Observed Differences
 1. **Latency vs Accuracy Trade-off:** The Flash model executes nearly three times faster (420ms vs 1150ms) while sacrificing only 3% overall categorization accuracy compared to the heavier Pro tier.
 2. **Cost Efficiency:** The Flash model is significantly cheaper, reducing the estimated token cost per 1,000 runs from $3.75 down to $0.22 (a ~94% reduction).
